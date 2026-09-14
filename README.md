@@ -4,57 +4,46 @@ Reusable prompt files define thematic rules and best practices for developers
 and coding agents. Copy the selected guidelines into a project, commit them,
 and describe in `AGENTS.md` when agents must load them.
 
-## Why guidelines?
+This repository is a **reference guideline registry**: a plain Git repository with a folder
+tree, consumed by the [`ai-guidelines`](https://github.com/gsemet/ai-guidelines) tool.
 
-See the full rationale explained in the following project:
-[gsemet/ai-guidelines](https://github.com/gsemet/ai-guidelines).
+## Documentation
 
-TL;DR:
-- **why committing guidelines?**
-  - guidelines are the 'guardrails' of a project
-  - they must be versioned and reviewed like any other code.
-  - any undesired update of a guideline may have a significant impact on the project.
-  - project owner shall decide when to update them
-- **why not skills?**
-  - you can, but you will place them all in .agents/skills/
-  - they will mix with non-guardrail skills.
-  - You do **not** want to use skill auto-activation (the `description` frontmatter)
-  - You want your project harness (`AGENTS.md`) to control when to load them.
-  - Because the same exact guidelines might be activated on two different scenario on two
-    different projects.
-- **why not Copilot's `*.instructions.md` ?**
-  - Because they are activated by the Coding Agent based on the opened files.
+All conceptual and procedural documentation lives in the tool's documentation, which is the
+single authoritative source:
 
-If you choose to use `*.instructions.md` or `SKILL.md` to carry reusable domain-specific rules,
-I strongly advise you to use Microsoft Agent Package manager (APM - https://github.com/microsoft/apm).
+| Question | Where |
+|---|---|
+| Why commit guidelines instead of using skills or `*.instructions.md`? | [Why guidelines](https://ai-guidelines.readthedocs.io/en/stable/explanation/why-guidelines.html) |
+| What exactly is a registry, and why does it have no index? | [Registries](https://ai-guidelines.readthedocs.io/en/stable/explanation/registries.html) |
+| How do I build a registry like this one? | [Build your own registry](https://ai-guidelines.readthedocs.io/en/stable/tutorials/build-your-own-registry.html) |
+| How do I pin a version? | [Pin a version](https://ai-guidelines.readthedocs.io/en/stable/how-to/pin-a-version.html) |
+| What source expressions are accepted? | [Source grammar](https://ai-guidelines.readthedocs.io/en/stable/reference/source-grammar.html) |
+| How does this compare to Microsoft APM? | [APM comparison](https://ai-guidelines.readthedocs.io/en/stable/explanation/apm-comparison.html) |
 
-As a matter of fact, I opened a Feature Requests to support `*.guidelines.md` in APM:
-[apm#2525](https://github.com/microsoft/apm/issues/2525).
+## Contents
 
-## Software Engineering
+- [SWE](SWE/README.md): software-engineering guidelines for Git and Python.
 
-See the [SWE catalog](SWE/README.md) for Git and Python guidelines.
+## Using these guidelines
 
-## Usage
-
-Install the guideline manager with uv:
-
-`uv tool install ai-guidelines`
-
-Then inspect available commands:
-
-```bash
-guidelines --help
+```console
+$ uv tool install ai-guidelines
+$ guidelines add gsemet/ai-guidelines-registry SWE/Git/Git_Commit_Message
+$ guidelines sync
 ```
 
-Register a guideline collection:
+Update on your own schedule:
 
-```bash
-guidelines add gsemet/ai-guidelines-registry SWE/Git/Git_Commit_Message
+```console
+$ guidelines outdated
+$ guidelines update
 ```
 
-Update registered guidelines when you choose:
+## Contributing a guideline
 
-```bash
-guidelines update
-```
+Follow the layout and frontmatter rules in
+[Build your own registry](https://ai-guidelines.readthedocs.io/en/stable/tutorials/build-your-own-registry.html).
+In short: one leaf folder per guideline, exactly two files inside it
+(`README.md` + `<kebab-slug>.guidelines.md`), a stable `guideline-id` UUID that never changes,
+and a bumped `name` version string on every content change.
