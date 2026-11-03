@@ -23,7 +23,7 @@ single authoritative source:
 
 ## Contents
 
-- [SWE](SWE/README.md): software-engineering guidelines for Git and Python.
+- [SWE](SWE/README.md): software-engineering guidelines for Git, GitLab, and Python.
 
 ## Using these guidelines
 

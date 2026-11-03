@@ -7,6 +7,7 @@ directory contains a human-readable `README.md` and its agent-facing
 ## Categories
 
 - [Git](Git/README.md): Git commit-message conventions.
+- [GitLab](Gitlab/README.md): pull request and merge request preparation.
 - [Python](Python/README.md): Python module documentation and unit testing.
 
 Guidelines are intentionally concise. The `*.guidelines.md` file is the
